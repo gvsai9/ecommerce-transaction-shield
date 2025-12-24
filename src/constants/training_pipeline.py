@@ -1,13 +1,13 @@
-#/constant/training_pipeline.py
+# constant/training_pipeline.py
 import os
 import sys
 
 TARGET_COLUMN = "Is Fraudulent"
 
-PIPELINE_NAME: str = "NetworkSecurity"
+PIPELINE_NAME: str = "ecommerce_fraud_detection_pipeline"
 ARTIFACT_DIR: str = "artifacts"
 
-FILE_NAME: str = "phishingData.csv"
+FILE_NAME: str = "transactions.csv"
 
 TRAIN_FILE_NAME: str = "train.csv"
 TEST_FILE_NAME: str = "test.csv"

@@ -209,11 +209,28 @@ __marimo__/
 
 
 
-#safe side
+
+# =========================
+# Python / project ignores
+# =========================
+
 venv/
 __pycache__/
 *.pyc
 .env
 logs/
 artifacts/
-data/
+
+# General python ignores
+...
+
+# DVC rules (single block, correct order)
+data/**
+!data/**/
+!data/**/*.dvc
+
+# Env / logs / artifacts
+venv/
+.env
+logs/
+artifacts/
