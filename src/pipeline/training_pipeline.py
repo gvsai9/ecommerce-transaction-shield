@@ -4,6 +4,8 @@ from src.entity.config_entity import DataIngestionConfig
 from src.components.data_ingestion import DataIngestion
 from src.entity.config_entity import DataValidationConfig
 from src.components.data_validation import DataValidation
+from src.entity.config_entity import DataTransformationConfig
+from src.components.data_transformation import DataTransformation
 
 class TrainingPipeline:
     def __init__(self):
@@ -54,7 +56,21 @@ class TrainingPipeline:
             f"Drift report: {data_validation_artifact.drift_report_file_path}"
         )
 
-        logger.info("Training pipeline completed successfully")
 
+        logger.info("Starting Data Transformation")
 
-        
+        data_transformation_config = DataTransformationConfig(
+            training_pipeline_config=self.training_pipeline_config
+        )
+
+        data_transformation = DataTransformation(
+            data_validation_artifact=data_validation_artifact,
+            data_transformation_config=data_transformation_config,
+        )
+
+        data_transformation_artifact = data_transformation.initiate_data_transformation()
+
+        logger.info(
+            f"Data transformation completed | "
+            f"Train features: {data_transformation_artifact.transformed_train_path}"
+        )
