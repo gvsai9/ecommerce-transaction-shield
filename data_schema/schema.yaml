@@ -1,0 +1,89 @@
+columns:
+  Transaction ID:
+    type: int
+    nullable: false
+
+  Customer ID:
+    type: int
+    nullable: false
+
+  Transaction Amount:
+    type: float
+    nullable: false
+    min: 0
+
+  Transaction Date:
+    type: datetime
+    nullable: false
+
+  Payment Method:
+    type: object
+    nullable: false
+
+  Product Category:
+    type: object
+    nullable: false
+
+  Quantity:
+    type: int
+    nullable: false
+    min: 1
+
+  Customer Age:
+    type: int
+    nullable: false
+    min: 18
+    max: 100
+
+  Customer Location:
+    type: object
+    nullable: false
+
+  Device Used:
+    type: object
+    nullable: false
+
+  IP Address:
+    type: object
+    nullable: false
+
+  Shipping Address:
+    type: object
+    nullable: false
+
+  Billing Address:
+    type: object
+    nullable: false
+
+  Account Age Days:
+    type: int
+    nullable: false
+    min: 0
+
+  Transaction Hour:
+    type: int
+    nullable: false
+    min: 0
+    max: 23
+
+  Is Fraudulent:
+    type: int
+    nullable: false
+
+target_column: Is Fraudulent
+
+numerical_columns:
+  - Transaction Amount
+  - Quantity
+  - Customer Age
+  - Account Age Days
+  - Transaction Hour
+
+categorical_columns:
+  - Payment Method
+  - Product Category
+  - Customer Location
+  - Device Used
+  - IP Address
+  - Shipping Address
+  - Billing Address

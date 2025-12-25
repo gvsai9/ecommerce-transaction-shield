@@ -2,7 +2,8 @@ from src.logger import logger
 from src.entity.config_entity import TrainingPipelineConfig
 from src.entity.config_entity import DataIngestionConfig
 from src.components.data_ingestion import DataIngestion
-
+from src.entity.config_entity import DataValidationConfig
+from src.components.data_validation import DataValidation
 
 class TrainingPipeline:
     def __init__(self):
@@ -25,4 +26,35 @@ class TrainingPipeline:
             f"Test file: {data_ingestion_artifact.test_file_path}"
         )
 
-        logger.info("Training pipeline completed")
+        logger.info("Proceeding to Data Validation...")
+
+               # =========================
+            # DATA VALIDATION
+            # =========================
+        logger.info("Starting Data Validation")
+
+        data_validation_config = DataValidationConfig(
+            training_pipeline_config=self.training_pipeline_config
+        )
+
+        data_validation = DataValidation(
+            data_ingestion_artifact=data_ingestion_artifact,
+            data_validation_config=data_validation_config,
+        )
+
+        data_validation_artifact = data_validation.initiate_data_validation()
+
+        if not data_validation_artifact.validation_status:
+            raise Exception(
+                "Data validation failed. Pipeline execution stopped."
+            )
+
+        logger.info(
+            "Data validation completed successfully | "
+            f"Drift report: {data_validation_artifact.drift_report_file_path}"
+        )
+
+        logger.info("Training pipeline completed successfully")
+
+
+        
