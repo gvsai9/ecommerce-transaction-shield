@@ -1,0 +1,7 @@
+[core]
+    remote = storage
+['remote "storage"']
+    url = https://dagshub.com/gvsai9/ecommerce-transaction-shield.dvc
+    auth = basic
+    user = gvsai9
+    password = 365790c54f421d1af42adcb1017c77c05fb5d5ba
