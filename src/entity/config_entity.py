@@ -108,3 +108,21 @@ class DataTransformationConfig:
             self.data_transformation_dir,
             data_transformation.PREPROCESSING_OBJECT_FILE_NAME
         )
+from src.constants import model_trainer
+
+class ModelTrainerConfig:
+    def __init__(self, training_pipeline_config):
+        self.model_trainer_dir = os.path.join(
+            training_pipeline_config.artifact_dir,
+            model_trainer.MODEL_TRAINER_DIR_NAME
+        )
+
+        self.trained_model_path = os.path.join(
+            self.model_trainer_dir,
+            model_trainer.MODEL_FILE_NAME
+        )
+
+        self.metrics_file_path = os.path.join(
+            self.model_trainer_dir,
+            model_trainer.METRICS_FILE_NAME
+        )

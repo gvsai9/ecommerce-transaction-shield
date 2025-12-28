@@ -6,6 +6,9 @@ from src.entity.config_entity import DataValidationConfig
 from src.components.data_validation import DataValidation
 from src.entity.config_entity import DataTransformationConfig
 from src.components.data_transformation import DataTransformation
+from src.entity.config_entity import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
+
 
 class TrainingPipeline:
     def __init__(self):
@@ -73,4 +76,20 @@ class TrainingPipeline:
         logger.info(
             f"Data transformation completed | "
             f"Train features: {data_transformation_artifact.transformed_train_path}"
+        )
+        logger.info("Starting Model Training")
+
+        model_trainer_config = ModelTrainerConfig(
+            training_pipeline_config=self.training_pipeline_config
+        )
+
+        model_trainer = ModelTrainer(
+            data_transformation_artifact=data_transformation_artifact,
+            model_trainer_config=model_trainer_config,
+        )
+
+        model_trainer_artifact = model_trainer.initiate_model_training()
+
+        logger.info(
+            f"Model training completed | Best model: {model_trainer_artifact.best_model_name}"
         )

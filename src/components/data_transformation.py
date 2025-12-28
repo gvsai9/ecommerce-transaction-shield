@@ -3,7 +3,6 @@ import sys
 import numpy as np
 import pandas as pd
 import pickle
-
 from src.logger import logger
 from src.exception import CustomException
 from src.constants.training_pipeline import TARGET_COLUMN

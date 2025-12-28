@@ -23,3 +23,9 @@ class DataTransformationArtifact:
     transformed_train_path: str
     transformed_test_path: str
     preprocessing_object_path: str
+
+@dataclass
+class ModelTrainerArtifact:
+    trained_model_path: str
+    best_model_name: str
+    best_model_score: float

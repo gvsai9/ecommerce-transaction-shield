@@ -8,4 +8,6 @@ dvc
 mlflow
 bentoml
 flask
+smote
+imbalanced-learn
 -e .
