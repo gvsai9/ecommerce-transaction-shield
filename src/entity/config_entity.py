@@ -126,3 +126,16 @@ class ModelTrainerConfig:
             self.model_trainer_dir,
             model_trainer.METRICS_FILE_NAME
         )
+from src.constants import model_evaluation
+
+class ModelEvaluationConfig:
+    def __init__(self, training_pipeline_config):
+        self.model_evaluation_dir = os.path.join(
+            training_pipeline_config.artifact_dir,
+            model_evaluation.MODEL_EVALUATION_DIR_NAME
+        )
+
+        self.evaluation_report_path = os.path.join(
+            self.model_evaluation_dir,
+            model_evaluation.EVALUATION_REPORT_FILE_NAME
+        )

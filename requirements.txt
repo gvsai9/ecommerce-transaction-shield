@@ -10,4 +10,10 @@ bentoml
 flask
 smote
 imbalanced-learn
+bentoml
+fastapi
+uvicorn
+pandas
+numpy
+pyyaml
 -e .

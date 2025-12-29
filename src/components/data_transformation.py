@@ -103,6 +103,7 @@ class DataTransformation:
                 )
 
             logger.info("Data transformation completed successfully")
+            logger.info(f"Transformed columns: {train_df.columns.tolist()} and target: {TARGET_COLUMN}")
 
             return DataTransformationArtifact(
                 transformed_train_path=self.config.transformed_train_path,

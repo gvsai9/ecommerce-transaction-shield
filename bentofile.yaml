@@ -1,0 +1,19 @@
+service: service:FraudService
+
+include:
+  - service.py
+  - src/**
+
+exclude:
+  - "artifacts/**"
+  - "data/**"
+  - ".dvc/**"
+  - ".git/**"
+  - "venv/**"
+  - "__pycache__/**"
+  - "*.csv"
+  - "*.pkl"
+
+python:
+  requirements_txt: requirements.txt
+  lock_packages: false

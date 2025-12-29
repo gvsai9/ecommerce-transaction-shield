@@ -5,6 +5,7 @@ import os,sys
 import numpy as np
 #import dill
 import pickle
+import shutil
 
 from sklearn.metrics import r2_score
 from sklearn.model_selection import GridSearchCV
@@ -25,4 +26,11 @@ def write_yaml_file(file_path: str, content: object, replace: bool = False) -> N
         with open(file_path, "w") as file:
             yaml.dump(content, file)
     except Exception as e:
-        raise CustomException(e, sys) 
+        raise CustomException(e, sys)
+
+def update_latest_artifacts(current_artifact_dir: str, latest_dir: str):
+    if os.path.exists(latest_dir):
+        shutil.rmtree(latest_dir)
+
+    shutil.copytree(current_artifact_dir, latest_dir)
+ 

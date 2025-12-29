@@ -8,6 +8,9 @@ from src.entity.config_entity import DataTransformationConfig
 from src.components.data_transformation import DataTransformation
 from src.entity.config_entity import ModelTrainerConfig
 from src.components.model_trainer import ModelTrainer
+from src.entity.config_entity import ModelEvaluationConfig
+from src.components.model_evaluation import ModelEvaluation
+from src.utils import update_latest_artifacts
 
 
 class TrainingPipeline:
@@ -93,3 +96,29 @@ class TrainingPipeline:
         logger.info(
             f"Model training completed | Best model: {model_trainer_artifact.best_model_name}"
         )
+        
+        logger.info("Starting Model Evaluation")
+
+        model_evaluation_config = ModelEvaluationConfig(
+            training_pipeline_config=self.training_pipeline_config
+        )
+
+        model_evaluation = ModelEvaluation(
+            model_trainer_artifact=model_trainer_artifact,
+            data_transformation_artifact=data_transformation_artifact,
+            model_evaluation_config=model_evaluation_config,
+        )
+
+        model_evaluation_artifact = model_evaluation.initiate_model_evaluation()
+
+        if not model_evaluation_artifact.is_model_accepted:
+            raise Exception("Model rejected by evaluation guardrails")
+
+        logger.info("Model accepted by evaluation")
+
+        if model_evaluation_artifact.is_model_accepted:
+            update_latest_artifacts(
+                current_artifact_dir=self.training_pipeline_config.artifact_dir,
+                latest_dir="artifacts/latest"
+            )
+
